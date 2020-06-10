@@ -10,7 +10,7 @@ This is a Emarketing Web Project base on OLX. In this websie user can post ads a
 ![Capture](https://user-images.githubusercontent.com/65450291/84246536-3386d900-ab20-11ea-8c53-25fbf6dd4794.JPG)
 
 # Technology:
-- Backend ASP.NET.
+- Backend C#.
 - Frontend HTML, HTML 5, CSS, Bootstrap, Javascrip.
 - Data Base SQL Server.
 
