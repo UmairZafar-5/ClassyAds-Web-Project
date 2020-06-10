@@ -15,4 +15,4 @@ This is a Emarketing Web Project base on OLX. In this websie user can post ads a
 - Data Base SQL Server.
 
 # How to compile:
-Firt attached mdf file or run SQLQuery in sql server  provide in data base folder. Then open Sell_Pk project  in your Visual studio ( Recommended visual studio 2019). In webconfig file add connection string of your database. Run the project in VS 
+Firt attached mdf file or run SQLQuery in sql server  provide in data base folder. Then open Sell_Pk project  in your Visual studio ( Recommended visual studio 2019). In webconfig file add connection string of your database. Run the project in VS.
