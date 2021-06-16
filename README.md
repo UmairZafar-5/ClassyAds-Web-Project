@@ -1,5 +1,5 @@
 # ClassyAds Web Project:
-This is a Emarketing Web Project base on OLX implemented in ASP.NET. In this websie user can post ads and can view others ads.
+This is a Emarketing Web Project base on OLX implemented in ASP.NET. In this website user can post ads and can view others ads.
 
 # Features:
 - User can create an account.
