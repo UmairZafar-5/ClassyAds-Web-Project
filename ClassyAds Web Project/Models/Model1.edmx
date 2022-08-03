@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Sell_PkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Admin">
+          <Key>
+            <PropertyRef Name="ad_id" />
+          </Key>
+          <Property Name="ad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ad_email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ad_password" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Category">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="cat_view" Type="int" />
+          <Property Name="cat_fk_ad" Type="int" />
+          <Property Name="cat_image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Product">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pro_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pro_des" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="pro_view" Type="int" />
+          <Property Name="pro_address" Type="nvarchar" MaxLength="200" />
+          <Property Name="pro_image1" Type="nvarchar(max)" />
+          <Property Name="pro_image2" Type="nvarchar(max)" />
+          <Property Name="pro_image3" Type="nvarchar(max)" />
+          <Property Name="pro_fk_user" Type="int" />
+          <Property Name="pro_fk_cat" Type="int" />
+          <Property Name="pro_contact" Type="nvarchar" MaxLength="20" />
+          <Property Name="pro_price" Type="nvarchar" MaxLength="20" />
+          <Property Name="Featured" Type="bit" />
+          <Property Name="Popular_Products" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_product_no">
+          <Key>
+            <PropertyRef Name="n_id" />
+          </Key>
+          <Property Name="n_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="n_no" Type="int" />
+          <Property Name="n_fk_cat" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="u_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="u_email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="u_password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="u_image" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__tbl_Categ__cat_f__3F466844">
+          <End Role="tbl_Admin" Type="Self.tbl_Admin" Multiplicity="0..1" />
+          <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Admin">
+              <PropertyRef Name="ad_id" />
+            </Principal>
+            <Dependent Role="tbl_Category">
+              <PropertyRef Name="cat_fk_ad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_produ__n_fk___4D94879B">
+          <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
+          <End Role="tbl_product_no" Type="Self.tbl_product_no" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="tbl_product_no">
+              <PropertyRef Name="n_fk_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Produ__pro_f__49C3F6B7">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="0..1" />
+          <End Role="tbl_Product" Type="Self.tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="tbl_Product">
+              <PropertyRef Name="pro_fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Produ__pro_f__4AB81AF0">
+          <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
+          <End Role="tbl_Product" Type="Self.tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="tbl_Product">
+              <PropertyRef Name="pro_fk_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sell_PkModelStoreContainer">
+          <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Category" EntityType="Self.tbl_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Product" EntityType="Self.tbl_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_product_no" EntityType="Self.tbl_product_no" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbl_Categ__cat_f__3F466844" Association="Self.FK__tbl_Categ__cat_f__3F466844">
+            <End Role="tbl_Admin" EntitySet="tbl_Admin" />
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_produ__n_fk___4D94879B" Association="Self.FK__tbl_produ__n_fk___4D94879B">
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+            <End Role="tbl_product_no" EntitySet="tbl_product_no" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Produ__pro_f__49C3F6B7" Association="Self.FK__tbl_Produ__pro_f__49C3F6B7">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Product" EntitySet="tbl_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Produ__pro_f__4AB81AF0" Association="Self.FK__tbl_Produ__pro_f__4AB81AF0">
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+            <End Role="tbl_Product" EntitySet="tbl_Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Sell_PkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Admin">
+          <Key>
+            <PropertyRef Name="ad_id" />
+          </Key>
+          <Property Name="ad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ad_email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ad_password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Category" Relationship="Self.FK__tbl_Categ__cat_f__3F466844" FromRole="tbl_Admin" ToRole="tbl_Category" />
+        </EntityType>
+        <EntityType Name="tbl_Category">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cat_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cat_view" Type="Int32" />
+          <Property Name="cat_fk_ad" Type="Int32" />
+          <Property Name="cat_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Admin" Relationship="Self.FK__tbl_Categ__cat_f__3F466844" FromRole="tbl_Category" ToRole="tbl_Admin" />
+          <NavigationProperty Name="tbl_product_no" Relationship="Self.FK__tbl_produ__n_fk___4D94879B" FromRole="tbl_Category" ToRole="tbl_product_no" />
+          <NavigationProperty Name="tbl_Product" Relationship="Self.FK__tbl_Produ__pro_f__4AB81AF0" FromRole="tbl_Category" ToRole="tbl_Product" />
+        </EntityType>
+        <EntityType Name="tbl_Product">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pro_des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pro_view" Type="Int32" />
+          <Property Name="pro_address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="pro_image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pro_image2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pro_image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pro_fk_user" Type="Int32" />
+          <Property Name="pro_fk_cat" Type="Int32" />
+          <Property Name="pro_contact" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="pro_price" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Featured" Type="Boolean" />
+          <Property Name="Popular_Products" Type="Boolean" />
+          <NavigationProperty Name="tbl_Category" Relationship="Self.FK__tbl_Produ__pro_f__4AB81AF0" FromRole="tbl_Product" ToRole="tbl_Category" />
+          <NavigationProperty Name="tbl_User" Relationship="Self.FK__tbl_Produ__pro_f__49C3F6B7" FromRole="tbl_Product" ToRole="tbl_User" />
+        </EntityType>
+        <EntityType Name="tbl_product_no">
+          <Key>
+            <PropertyRef Name="n_id" />
+          </Key>
+          <Property Name="n_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="n_no" Type="Int32" />
+          <Property Name="n_fk_cat" Type="Int32" />
+          <NavigationProperty Name="tbl_Category" Relationship="Self.FK__tbl_produ__n_fk___4D94879B" FromRole="tbl_product_no" ToRole="tbl_Category" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="u_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Product" Relationship="Self.FK__tbl_Produ__pro_f__49C3F6B7" FromRole="tbl_User" ToRole="tbl_Product" />
+        </EntityType>
+        <Association Name="FK__tbl_Categ__cat_f__3F466844">
+          <End Role="tbl_Admin" Type="Self.tbl_Admin" Multiplicity="0..1" />
+          <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Admin">
+              <PropertyRef Name="ad_id" />
+            </Principal>
+            <Dependent Role="tbl_Category">
+              <PropertyRef Name="cat_fk_ad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_produ__n_fk___4D94879B">
+          <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
+          <End Role="tbl_product_no" Type="Self.tbl_product_no" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="tbl_product_no">
+              <PropertyRef Name="n_fk_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Produ__pro_f__4AB81AF0">
+          <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
+          <End Role="tbl_Product" Type="Self.tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="tbl_Product">
+              <PropertyRef Name="pro_fk_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Produ__pro_f__49C3F6B7">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="0..1" />
+          <End Role="tbl_Product" Type="Self.tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="tbl_Product">
+              <PropertyRef Name="pro_fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sell_PkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" />
+          <EntitySet Name="tbl_Category" EntityType="Self.tbl_Category" />
+          <EntitySet Name="tbl_Product" EntityType="Self.tbl_Product" />
+          <EntitySet Name="tbl_product_no" EntityType="Self.tbl_product_no" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" />
+          <AssociationSet Name="FK__tbl_Categ__cat_f__3F466844" Association="Self.FK__tbl_Categ__cat_f__3F466844">
+            <End Role="tbl_Admin" EntitySet="tbl_Admin" />
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_produ__n_fk___4D94879B" Association="Self.FK__tbl_produ__n_fk___4D94879B">
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+            <End Role="tbl_product_no" EntitySet="tbl_product_no" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Produ__pro_f__4AB81AF0" Association="Self.FK__tbl_Produ__pro_f__4AB81AF0">
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+            <End Role="tbl_Product" EntitySet="tbl_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Produ__pro_f__49C3F6B7" Association="Self.FK__tbl_Produ__pro_f__49C3F6B7">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Product" EntitySet="tbl_Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Sell_PkModelStoreContainer" CdmEntityContainer="Sell_PkEntities">
+          <EntitySetMapping Name="tbl_Admin">
+            <EntityTypeMapping TypeName="Sell_PkModel.tbl_Admin">
+              <MappingFragment StoreEntitySet="tbl_Admin">
+                <ScalarProperty Name="ad_id" ColumnName="ad_id" />
+                <ScalarProperty Name="ad_name" ColumnName="ad_name" />
+                <ScalarProperty Name="ad_email" ColumnName="ad_email" />
+                <ScalarProperty Name="ad_password" ColumnName="ad_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Category">
+            <EntityTypeMapping TypeName="Sell_PkModel.tbl_Category">
+              <MappingFragment StoreEntitySet="tbl_Category">
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+                <ScalarProperty Name="cat_view" ColumnName="cat_view" />
+                <ScalarProperty Name="cat_fk_ad" ColumnName="cat_fk_ad" />
+                <ScalarProperty Name="cat_image" ColumnName="cat_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Product">
+            <EntityTypeMapping TypeName="Sell_PkModel.tbl_Product">
+              <MappingFragment StoreEntitySet="tbl_Product">
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="pro_name" ColumnName="pro_name" />
+                <ScalarProperty Name="pro_des" ColumnName="pro_des" />
+                <ScalarProperty Name="pro_view" ColumnName="pro_view" />
+                <ScalarProperty Name="pro_address" ColumnName="pro_address" />
+                <ScalarProperty Name="pro_image1" ColumnName="pro_image1" />
+                <ScalarProperty Name="pro_image2" ColumnName="pro_image2" />
+                <ScalarProperty Name="pro_image3" ColumnName="pro_image3" />
+                <ScalarProperty Name="pro_fk_user" ColumnName="pro_fk_user" />
+                <ScalarProperty Name="pro_fk_cat" ColumnName="pro_fk_cat" />
+                <ScalarProperty Name="pro_contact" ColumnName="pro_contact" />
+                <ScalarProperty Name="pro_price" ColumnName="pro_price" />
+                <ScalarProperty Name="Featured" ColumnName="Featured" />
+                <ScalarProperty Name="Popular_Products" ColumnName="Popular_Products" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_product_no">
+            <EntityTypeMapping TypeName="Sell_PkModel.tbl_product_no">
+              <MappingFragment StoreEntitySet="tbl_product_no">
+                <ScalarProperty Name="n_id" ColumnName="n_id" />
+                <ScalarProperty Name="n_no" ColumnName="n_no" />
+                <ScalarProperty Name="n_fk_cat" ColumnName="n_fk_cat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="Sell_PkModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="u_name" ColumnName="u_name" />
+                <ScalarProperty Name="u_email" ColumnName="u_email" />
+                <ScalarProperty Name="u_password" ColumnName="u_password" />
+                <ScalarProperty Name="u_image" ColumnName="u_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,38 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<ClassyAds_Web_Project.Models.tbl_Category>
+
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View  Category</title>
+    <link href="~/Content/paginition.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row" style="margin-bottom:20px">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                string path = @item.cat_image;
+                path = path.Substring(1);
+                <div class="col-lg-3 col-md-3" style="height:200px;margin-top:100px">
+                    <img src="@path" style=" height:100%;width:100% ;border-radius:50px 50px 50px 50px" />
+                    <h2 style="color:#808080; font-family:'Arial Rounded MT';text-align:center">@item.cat_name</h2>
+                    <button>@Html.ActionLink("DeleteCategory", "DeleteCategory", new { id = @item.cat_id })</button>
+                </div>
+            }
+        }
+    </div>
+    <div id="container" style="margin-left: 20px">
+        <div class="pagination" style="margin-left: 400px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Ads", new { page }))
+        </div>
+    </div>
+</body>
+</html>

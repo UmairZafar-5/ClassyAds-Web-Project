@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1a2dc4746b194c028ae7b16c64dd6516" Name="Diagram1">
+        <EntityTypeShape EntityType="Sell_PkModel.tbl_Admin" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sell_PkModel.tbl_Category" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sell_PkModel.tbl_Product" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sell_PkModel.tbl_product_no" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sell_PkModel.tbl_User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Sell_PkModel.FK__tbl_Categ__cat_f__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Sell_PkModel.FK__tbl_produ__n_fk___4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="Sell_PkModel.FK__tbl_Produ__pro_f__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Sell_PkModel.FK__tbl_Produ__pro_f__49C3F6B7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
